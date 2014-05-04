@@ -1,0 +1,38 @@
+
+SOURCES = $(wildcard filesystem/src/*.cpp system/src/*.cpp)
+
+OBJECTS = $(SOURCES:.cpp=.o)
+
+#
+# The following mostly comes from Makevars for Rcpp <= 0.10 that generates 
+# a user shared library
+#
+
+all: 	$(SHLIB) userLibrary 
+
+## we place it inside the inst/ directory so that it gets installed by the package
+USERDIR =	../inst/lib
+
+USERLIB	=	libBoost$(DYLIB_EXT)
+USERLIBST =	libBoost.a
+
+PKG_CPPFLAGS += -I../inst/include/boost
+
+userLibrary: 	$(USERLIB) $(USERLIBST)
+		-@if test ! -e $(USERDIR)$(R_ARCH); then mkdir -p $(USERDIR)$(R_ARCH); fi
+		cp $(USERLIB) $(USERDIR)$(R_ARCH)
+		cp $(USERLIBST) $(USERDIR)$(R_ARCH)
+		rm $(USERLIB) $(USERLIBST)
+
+$(USERLIB): 	$(OBJECTS)
+		$(SHLIB_CXXLD) -o $(USERLIB) $(OBJECTS) $(SHLIB_CXXLDFLAGS) $(ALL_LIBS)
+		@: $${INSTALL_NAME_TOOL=/usr/bin/install_name_tool}; if test -e "$$INSTALL_NAME_TOOL"; then "$$INSTALL_NAME_TOOL" -id '$(R_PACKAGE_DIR)/lib$(R_ARCH)/$(USERLIB)' '$(USERLIB)'; fi
+
+$(USERLIBST): 	$(OBJECTS)
+		$(AR) qc $(USERLIBST) $(OBJECTS)
+		@if test -n "$(RANLIB)"; then $(RANLIB) $(USERLIBST); fi
+
+.PHONY: 	all clean userLibrary 
+
+clean:
+		rm -f $(OBJECTS) $(SHLIB) $(USERLIB) $(USERLIBST)

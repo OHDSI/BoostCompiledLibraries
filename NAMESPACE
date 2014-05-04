@@ -1,0 +1,2 @@
+useDynLib(BoostCompiledLibraries, .registration=TRUE)
+export(BoostLdFlags)

@@ -1,0 +1,14 @@
+Package: BoostCompiledLibraries
+Type: Package
+Title: BOOST compiled libraries
+Version: 1.54
+Date: 2014-05-03
+Author: Marc A. Suchard
+Maintainer: Marc A. Suchard <msuchard@ucla.edu>
+Description: More about what it does (maybe more than one
+       line)
+License: What Licence is it under ?
+Depends:    
+    BH (>= 1.54.0)   
+LinkingTo:    
+    BH
