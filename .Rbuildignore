@@ -3,3 +3,4 @@
 local
 R/*.save
 deploy.sh
+.travis.yml

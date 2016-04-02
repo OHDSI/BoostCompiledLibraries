@@ -33,6 +33,7 @@ install:
   # Install R packages
   - Rscript -e "if (!require('devtools')) install.packages('devtools')"   
   - Rscript -e "if (!require('BH')) install.packages('BH')" 
+  - Rscript -e "if (!require('drat')) install.packages('drat')"
   
 before_script:
   - export PKG_NAME=$(Rscript -e 'cat(paste0(devtools::as.package(".")$package))')
