@@ -14,8 +14,6 @@ Description:
 	distribution of Boost libraries that reduces code-duplication in
 	other packages.
 License: BSL-1.0
-Depends:    
-    BH (>= 1.58.0)   
 LinkingTo:    
-    BH
+    BH (>= 1.58.0)
     
