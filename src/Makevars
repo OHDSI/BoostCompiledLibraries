@@ -1,5 +1,5 @@
 
-SOURCES = $(wildcard filesystem/src/*.cpp system/src/*.cpp)
+SOURCES = $(wildcard filesystem/src/*.cpp system/src/*.cpp program_options/src/*.cpp)
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
